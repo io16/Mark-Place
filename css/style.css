@@ -7,7 +7,7 @@ img {
     max-width: 100%;
 }
 
-a {
+a, a:hover, a:focus {
     display: inline-block;
     text-decoration: none;
 }
