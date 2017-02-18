@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>Luky Store|Market Place</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <!--<link rel="stylesheet" href="css/dopstyle.css">-->
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -18,8 +22,10 @@
             <a href="#"><h1>Luky Store</h1></a>
         </div>
         <div class="wrap-search">
-            <label for="search"></label>
-            <input type="text" class="search" id="search">
+            <form action="#">
+                <label for="search"></label>
+                <input type="text" class="search" id="search">
+            </form>
         </div>
         <div class="reg">
             <button type="button" class="btn btn-primary" id="login">Вход</button>
@@ -74,7 +80,55 @@
         </nav>
     </header>
     <div class="container">
+        <div class="row otstup">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    </ol>
 
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="images/slider/1.jpg" alt="...">
+                            <div class="carousel-caption">
+                                <h3>Россия (Москва)</h3>
+                                <p>Где это видано, чтобы люди в Москве без прописки проживали.</p>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <img src="images/slider/2.jpg" alt="...">
+                            <div class="carousel-caption">
+                                <h3>Осень</h3>
+                                <p>Осень — это вторая весна, когда каждый лист — цветок.</p>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <img src="images/slider/3.jpg" alt="...">
+                            <div class="carousel-caption">
+                                <h3>Дождь</h3>
+                                <p>Осень опять идут дожди...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
     </div>
     <footer>
 

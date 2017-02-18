@@ -4,6 +4,7 @@ h1, h2, h3, h4 , h5, h6, img, ul, li {
 }
 
 img {
+    display: block;
     max-width: 100%;
 }
 
@@ -31,11 +32,11 @@ header {
 }
 
 .wrap-head {
-    padding: 10px 0 10px 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 0 10px 0;
 }
 
 .logo {
@@ -84,6 +85,7 @@ nav {
 .menu {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     background-color: #2e6da4;
 }
 
@@ -99,7 +101,7 @@ nav {
     font-size: 14px;
     font-weight: bold;
     color: #fff;
-    padding: 15px 30px;
+    padding: 15px 20px;
 }
 
 .menu > li:hover > a, .submenu li:hover a {
@@ -149,4 +151,17 @@ nav {
     -o-transform: scaleY(1);
     -ms-transform: scaleY(1);
     transform: scaleY(1);
+}
+
+.slider {
+    width: 650px;
+    margin: 0 auto;
+}
+
+/*
+.container {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 960px;
+    padding: 0 15px;
 }
