@@ -78,8 +78,10 @@ h1 {
 }
 
 nav {
+    padding: 20px 0;
     display: table;
-    width: 100%;
+    width: 1050px;
+    margin: 0 auto;
 }
 
 .menu {
@@ -98,10 +100,10 @@ nav {
 .menu > li > a {
     display: block;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
     color: #fff;
-    padding: 15px 20px;
+    padding: 15px 10px;
 }
 
 .menu > li:hover > a, .submenu li:hover a {
@@ -138,7 +140,7 @@ nav {
     text-align: left;
     display: block;
     padding: 12px 15px;
-    font-size: 14px;
+    font-size: 13px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 .submenu li:last-child a {
@@ -153,10 +155,66 @@ nav {
     transform: scaleY(1);
 }
 
-.slider {
-    width: 650px;
+.container {
+    width: 1050px;
+    padding: 0;
+}
+
+.item img {
+
+    width: 980px;
+    height: 428px;
+    overflow: hidden;
+}
+
+#slider-wrap{ /* Оболочка слайдера и кнопок */
+    width:660px;
     margin: 0 auto;
 }
+#slider{ /* Оболочка слайдера */
+    width:640px;
+    height:360px;
+    overflow: hidden;
+    border:#eee solid 10px;
+    position:relative;}
+.slide{ /* Слайд */
+    width:100%;
+    height:100%;
+}
+.sli-links{ /* Кнопки смены слайдов */
+    margin-top:10px;
+    text-align:center;}
+.sli-links .control-slide{
+    margin:2px;
+    display:inline-block;
+    width:16px;
+    height:16px;
+    overflow:hidden;
+    text-indent:-9999px;
+    background:url(../images/radioBg.png) center bottom no-repeat;}
+.sli-links .control-slide:hover{
+    cursor:pointer;
+    background-position:center center;}
+.sli-links .control-slide.active{
+    background-position:center top;}
+#prewbutton, #nextbutton{ /* Ссылка "Следующий" и "Педыдущий" */
+    display:block;
+    width:15px;
+    height:100%;
+    position:absolute;
+    top:0;
+    overflow:hidden;
+    text-indent:-999px;
+    background:url(../images/arrowBg.png) left center no-repeat;
+    opacity:0.8;
+    z-index:3;
+    outline:none !important;}
+#prewbutton{left:10px;}
+#nextbutton{
+    right:10px;
+    background:url(../images/arrowBg.png) right center no-repeat;}
+#prewbutton:hover, #nextbutton:hover{
+    opacity:1;}
 
 /*
 .container {
