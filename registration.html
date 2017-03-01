@@ -6,7 +6,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="description" content=""/>
     <meta name="keywords" content=""/>
-
+    <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/styleLogIn.css" media="screen" type="text/css"/>
 
     <script src="./js/main.js"></script>
@@ -19,7 +19,7 @@
 <div id="login">
     <form action="/" method="post">
 
-        <p><span class="fontawesome-user"></span><input name="userName" type="text"
+        <p><span  id="loginSpan" class="fontawesome-user"></span><input name="userName" type="text"
                                                         onchange="loginValidation()" placeholder="Login" required>
         </p> <!-- JS because of IE support; better: placeholder="Username" -->
         <p><span class="fontawesome-user"></span><input name="firstName" type="text" placeholder="First  Name"

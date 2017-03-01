@@ -1,9 +1,6 @@
 /**
  * Created by igor on 01.03.17.
  */
-/**
- * Created by igor on 01.03.17.
- */
 function loginValidation() {
     var login = document.getElementsByName("userName")[0];
     var loginValue = login.value;
@@ -26,9 +23,14 @@ function loginValidation() {
         }
     }
 
-    if (validationStatus)
-        login.style.backgroundColor = "green";
-    else
+    var loginSpan  = document.getElementById("loginSpan");
+    if (validationStatus){
 
-        login.style.backgroundColor = "red";
+        loginSpan.className = "fontawesome-check";
+    }
+else
+    loginSpan.className ="fa fa-times";
 }
+/**
+ * Created by igor on 01.03.17.
+ */
