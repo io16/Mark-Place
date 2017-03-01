@@ -5,19 +5,19 @@
  * Created by igor on 01.03.17.
  */
 function loginValidation() {
-    var login = document.getElementsByName("userName")[0].value;
+    var login = document.getElementsByName("userName")[0];
+    var loginValue = login.value;
     var incorrectChars = ["%", "'", '"', "$", "~", "#"];
 
     var validationStatus = false;
-    if (login.length >= 3) {
+    if (loginValue.length >= 3) {
         validationStatus = true;
 
-        for (var i = 0; i < login.length && validationStatus; i++) {
+        for (var i = 0; i < loginValue.length && validationStatus; i++) {
             for (var j = 0; j < incorrectChars.length; j++) {
 
 
-
-                if (login.indexOf(incorrectChars[j]) != -1) {
+                if (loginValue.indexOf(incorrectChars[j]) != -1) {
                     validationStatus = false;
                     break;
 
@@ -26,6 +26,9 @@ function loginValidation() {
         }
     }
 
-    console.log(validationStatus)
+    if (validationStatus)
+        login.style.backgroundColor = "green";
+    else
 
+        login.style.backgroundColor = "red";
 }
