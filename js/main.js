@@ -43,7 +43,12 @@ function passCorrect(obj) {
 }
 function emailValidation(obj) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-   console.log(re.test(obj.value))
+    var objSpan = document.getElementById(obj.getAttribute('name') + "Span");
+    if (re.test(obj.value)) {
+        objSpan.className = "fontawesome-check";
+    }
+    else
+        objSpan.className = "fa fa-times";
 }
 /**
  * Created by igor on 01.03.17.
