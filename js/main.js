@@ -1,20 +1,21 @@
 /**
  * Created by igor on 01.03.17.
  */
-function loginValidation() {
-    var login = document.getElementsByName("userName")[0];
-    var loginValue = login.value;
+function validation(obj) {
+    var objName = obj.getAttribute('name')
+
+    var objValue = obj.value;
     var incorrectChars = ["%", "'", '"', "$", "~", "#"];
 
     var validationStatus = false;
-    if (loginValue.length >= 3) {
+    if (objValue.length >= 3) {
         validationStatus = true;
 
-        for (var i = 0; i < loginValue.length && validationStatus; i++) {
+        for (var i = 0; i < objValue.length && validationStatus; i++) {
             for (var j = 0; j < incorrectChars.length; j++) {
 
 
-                if (loginValue.indexOf(incorrectChars[j]) != -1) {
+                if (objValue.indexOf(incorrectChars[j]) != -1) {
                     validationStatus = false;
                     break;
 
@@ -23,13 +24,26 @@ function loginValidation() {
         }
     }
 
-    var loginSpan  = document.getElementById("loginSpan");
-    if (validationStatus){
+    var objSpan = document.getElementById(objName + "Span");
+    if (validationStatus) {
 
-        loginSpan.className = "fontawesome-check";
+        objSpan.className = "fontawesome-check";
     }
-else
-    loginSpan.className ="fa fa-times";
+    else
+        objSpan.className = "fa fa-times";
+}
+
+function passCorrect(obj) {
+    var objSpan = document.getElementById(obj.getAttribute('name') + "Span2");
+    if (obj.value === document.getElementsByName("pass")[0].value) {
+        objSpan.className = "fontawesome-check";
+    }
+    else
+        objSpan.className = "fa fa-times";
+}
+function emailValidation(obj) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+   console.log(re.test(obj.value))
 }
 /**
  * Created by igor on 01.03.17.

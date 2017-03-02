@@ -19,18 +19,27 @@
 <div id="login">
     <form action="/" method="post">
 
-        <p><span  id="loginSpan" class="fontawesome-user"></span><input name="userName" type="text"
-                                                        onchange="loginValidation()" placeholder="Login" required>
+        <p><span id="loginSpan" class="fontawesome-user"></span><input name="login" type="text"
+                                                                       onchange="validation(this)" placeholder="Login"
+                                                                       minlength="3" required>
         </p> <!-- JS because of IE support; better: placeholder="Username" -->
-        <p><span class="fontawesome-user"></span><input name="firstName" type="text" placeholder="First  Name"
-                                                        required></p>
+        <p><span id="firstNameSpan" class="fontawesome-user"></span><input name="firstName" type="text"
+                                                                           placeholder="First  Name"
+                                                                           onchange="validation(this)" minlength="3"
+                                                                           required></p>
         <!-- JS because of IE support; better: placeholder="Username" -->
 
 
-        <p><span class="fontawesome-user"></span><input name="email" type="text" placeholder="Email" required></p>
+        <p><span id="emailSpan" class="fontawesome-email"></span><input name="email" type="text" placeholder="Email"
+                                                                        onchange="emailValidation(this)" required></p>
         <!-- JS because of IE support; better: placeholder="Username" -->
-        <p><span class="fontawesome-lock"></span><input name="pass" type="password" placeholder="Password"
-                                                        minlength="6" required></p>
+        <p><span id="passSpan" class="fontawesome-lock"></span><input name="pass" type="password" placeholder="Password"
+                                                                      onchange="validation(this)" minlength="6"
+                                                                      required></p>
+        <p><span id="passSpan2" class="fontawesome-lock"></span><input name="pass" type="password"
+                                                                       onchange="passCorrect(this)"
+                                                                       placeholder="Password"
+                                                                       minlength="6" required></p>
         <!-- JS because of IE support; better: placeholder="Password" -->
 
         <p><input id="go" type="submit" value="Register"></p>
