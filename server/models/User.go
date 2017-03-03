@@ -7,13 +7,18 @@ import (
 	"log"
 	"regexp"
 	"strconv"
+	"golang.org/x/crypto/bcrypt"
+	"github.com/jinzhu/gorm"
+	"../conf/"
+	"fmt"
 )
 
 type User struct {
-	Name  string `json:"name"`
-	Login string `json:"login"`
-	Email string `json:"email"`
-	Pass  string `json:"pass"`
+	gorm.Model
+	Name  string `json:"name" gorm:"size:255"`
+	Login string `json:"login" gorm:"size:255"`
+	Email string `json:"email"gorm:"size:255"`
+	Pass  string `json:"pass"gorm:"size:255"`
 }
 
 func isEmailValid(email string) bool {
@@ -32,16 +37,44 @@ func isUserValid(user User) bool {
 	return validationStatus
 
 }
+func saveUserToDB(user User) bool {
+
+	db := conf.InitDb()
+	defer db.Close()
+	//log.Print(user)
+
+	test := User{}
+	db.Where("login = ?", user.Login).First(&test)
+	if (test.ID == 0) {
+		fmt.Println("user Created")
+		password := []byte (user.Pass)
+		hashedPassword, err := bcrypt.GenerateFromPassword(password, bcrypt.DefaultCost)
+		if err != nil {
+			panic(err)
+		}
+		user.Pass = string(hashedPassword)
+		db.Create(&user)
+		return true
+
+	} else {
+		fmt.Print("user is alerady exist")
+
+		return false
+
+	}
+}
 func AddUser(c echo.Context) error {
 	user := User{}
 	defer c.Request().Body.Close()
 	err := json.NewDecoder(c.Request().Body).Decode(&user)
 	userStatus := isUserValid(user)
-	log.Printf("this is your user: %#v /n \n", user)
+	if userStatus {
+		userStatus = saveUserToDB(user)
+
+	}
 	if err != nil {
 		log.Printf("Failed processing addUser request: %s", err)
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
-
-	return c.String(http.StatusOK, strconv.FormatBool(userStatus))
+	return c.String(http.StatusOK, strconv.FormatBool(userStatus)) // if user created -- return true
 }

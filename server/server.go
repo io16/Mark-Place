@@ -1,20 +1,17 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"./models/"
-	"github.com/jinzhu/gorm"
+	"./conf/"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/labstack/echo"
 )
 
 func main() {
-	db, err := gorm.Open("postgres", "host=localhost user=postgres dbname=test sslmode=disable password=299792458")
+	db := conf.InitDb()
 	defer db.Close()
-	if err != nil {
 
-		fmt.Print(err)
-	}
 	db.AutoMigrate(&models.User{})
 	e := echo.New()
 	e.POST("/user", models.AddUser)
