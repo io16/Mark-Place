@@ -59,7 +59,7 @@ func saveUserToDB(user User) bool {
 		return true
 
 	} else {
-		fmt.Print("user is alerady exist")
+		fmt.Println("user is alerady exist")
 
 		return false
 
@@ -74,9 +74,6 @@ func AddUser(c echo.Context) error {
 		userStatus = saveUserToDB(user)
 
 	}
-	//if err != nil {
-	//	log.Printf("Failed processing addUser request: %s", err)
-	//	return echo.NewHTTPError(http.StatusInternalServerError)
-	//}
+
 	return c.String(http.StatusOK, strconv.FormatBool(userStatus)) // if user created -- return true
 }

@@ -31,17 +31,20 @@ function validation(obj) {
     }
     else
         objSpan.className = "fa fa-times";
+    console.log(validationStatus + " to "+ objName)
+    return validationStatus
 }
 
-function passCorrect(obj) {
-    var objSpan = document.getElementById(obj.getAttribute('name') + "Span2");
-    if (obj.value === document.getElementsByName("pass")[0].value) {
+function passCorrect() {
+    var objSpan = document.getElementById("passSpan2");
+    if (document.getElementsByName("pass")[1].value == document.getElementsByName("pass")[0].value) {
         objSpan.className = "fontawesome-check";
     }
     else
         objSpan.className = "fa fa-times";
+    return (document.getElementsByName("pass")[1].value == document.getElementsByName("pass")[0].value)
 }
-function emailValidation(obj)  {
+function emailValidation(obj) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var objSpan = document.getElementById(obj.getAttribute('name') + "Span");
     if (re.test(obj.value)) {
@@ -52,35 +55,33 @@ function emailValidation(obj)  {
     return re.test(obj.value)
 }
 function createUser() {
-    var login = document.getElementsByName('login')[0].value;
-    var pass = document.getElementsByName('pass')[0].value;
-    var name = document.getElementsByName('firstName')[0].value;
-    var email = document.getElementsByName('email')[0].value;
-   console.log( emailValidation(document.getElementsByName('email')[0]))
+    var login = document.getElementsByName('login')[0];
+    var pass = document.getElementsByName('pass')[0];
+    var name = document.getElementsByName('firstName')[0];
+    var email = document.getElementsByName('email')[0];
+    if (emailValidation(email) && validation(name) && validation(login) && validation(pass) && passCorrect())
+    {
+        var obj = new Object();
+        obj.login = login.value;
+        obj.name = name.value;
+        obj.email = email.value;
+        obj.pass = pass.value;
 
-    var obj = new Object();
-    obj.pass = pass;
-    obj.login = login;
-    obj.email = email;
-    obj.name = name;
-
-    $.post("http://localhost:1324/user", {
-
-            data: JSON.stringify(obj)
-
-        }, function (data) {
-
-            console.log(data)
-            if (data) {
-
-                console.log("user created")
-            } else {
-                console.log("user don`t create ")
+        $.post("/user", {
+                data: JSON.stringify(obj)
+            }, function (data) {
+                console.log(data)
+                if (data == "true") {
+                   alert("user created")
+                } else {
+                    alert("user don`t create ")
+                }
             }
+        )
+    } else {
+        alert("incorrect user")
+    }
 
-
-        }
-    )
 }
 
 
