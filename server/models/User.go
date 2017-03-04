@@ -4,13 +4,13 @@ import (
 	"github.com/labstack/echo"
 	"encoding/json"
 	"net/http"
-	"log"
 	"regexp"
 	"strconv"
 	"golang.org/x/crypto/bcrypt"
 	"github.com/jinzhu/gorm"
 	"../conf/"
 	"fmt"
+	"github.com/labstack/gommon/log"
 )
 
 type User struct {
@@ -32,6 +32,8 @@ func isUserValid(user User) bool {
 
 	if r.MatchString(user.Login) &&  r.MatchString(user.Name) && r.MatchString(user.Pass) && isEmailValid(user.Email) {
 		validationStatus = true
+	} else {
+		log.Print("user invalid")
 	}
 
 	return validationStatus
@@ -57,7 +59,7 @@ func saveUserToDB(user User) bool {
 		return true
 
 	} else {
-		fmt.Print("user is alerady exist")
+		fmt.Println("user is alerady exist")
 
 		return false
 
@@ -66,15 +68,12 @@ func saveUserToDB(user User) bool {
 func AddUser(c echo.Context) error {
 	user := User{}
 	defer c.Request().Body.Close()
-	err := json.NewDecoder(c.Request().Body).Decode(&user)
+	json.Unmarshal([]byte(c.FormValue("data")), &user)
 	userStatus := isUserValid(user)
 	if userStatus {
 		userStatus = saveUserToDB(user)
 
 	}
-	if err != nil {
-		log.Printf("Failed processing addUser request: %s", err)
-		return echo.NewHTTPError(http.StatusInternalServerError)
-	}
+
 	return c.String(http.StatusOK, strconv.FormatBool(userStatus)) // if user created -- return true
 }
