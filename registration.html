@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/styleLogIn.css" media="screen" type="text/css"/>
 
     <script src="./js/main.js"></script>
+    <script src="./js/jquery-1.7.2.min.js"></script>
 
 
 </head>
@@ -19,7 +20,7 @@
 <div id="login">
     <form action="/" method="post">
 
-        <p><span id="loginSpan" class="fontawesome-user"></span><input name="login" type="text"
+        <p><span id="loginSpan" class="fontawesome-user"></span><input  name="login" type="text"
                                                                        onchange="validation(this)" placeholder="Login"
                                                                        minlength="3" required>
         </p> <!-- JS because of IE support; better: placeholder="Username" -->
@@ -42,7 +43,7 @@
                                                                        minlength="6" required></p>
         <!-- JS because of IE support; better: placeholder="Password" -->
 
-        <p><input id="go" type="submit" value="Register"></p>
+        <p><input id="go" type="button" value="Register" onclick="createUser()"></p>
 
 
     </form>

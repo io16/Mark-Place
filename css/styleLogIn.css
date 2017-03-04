@@ -91,7 +91,7 @@ p {
 	color:#fff;
 }
 
-#login form input[type="submit"] {
+#login form input[type="button"] {
 	border-radius: 3px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;

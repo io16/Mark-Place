@@ -41,7 +41,7 @@ function passCorrect(obj) {
     else
         objSpan.className = "fa fa-times";
 }
-function emailValidation(obj) {
+function emailValidation(obj)  {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var objSpan = document.getElementById(obj.getAttribute('name') + "Span");
     if (re.test(obj.value)) {
@@ -49,7 +49,41 @@ function emailValidation(obj) {
     }
     else
         objSpan.className = "fa fa-times";
+    return re.test(obj.value)
 }
+function createUser() {
+    var login = document.getElementsByName('login')[0].value;
+    var pass = document.getElementsByName('pass')[0].value;
+    var name = document.getElementsByName('firstName')[0].value;
+    var email = document.getElementsByName('email')[0].value;
+   console.log( emailValidation(document.getElementsByName('email')[0]))
+
+    var obj = new Object();
+    obj.pass = pass;
+    obj.login = login;
+    obj.email = email;
+    obj.name = name;
+
+    $.post("http://localhost:1324/user", {
+
+            data: JSON.stringify(obj)
+
+        }, function (data) {
+
+            console.log(data)
+            if (data) {
+
+                console.log("user created")
+            } else {
+                console.log("user don`t create ")
+            }
+
+
+        }
+    )
+}
+
+
 /**
  * Created by igor on 01.03.17.
  */
