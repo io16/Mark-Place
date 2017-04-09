@@ -12,7 +12,7 @@ a, a:hover, a:focus {
     display: inline-block;
     text-decoration: none;
     outline: none;
-    transition: .3s ease-in-out;
+    transition: .5s ease-in-out;
 }
 
 ul, li {
@@ -23,7 +23,7 @@ ul, li {
 
 .wrapper {
     width: 100%;
-    background-color: #e2e2e2;
+    background-color: #a1c3c2;
 }
 
 header {
@@ -116,7 +116,7 @@ nav {
     margin-left: 10px;
 }
 .submenu {
-    background: #1e2637;
+    background: #31485b;
     position: absolute;
     left: 0;
     top: 100%;
@@ -160,26 +160,18 @@ nav {
     padding: 0;
 }
 
-.item img {
-
-    width: 980px;
-    height: 428px;
-    overflow: hidden;
-}
-
 #slider-wrap{ /* Оболочка слайдера и кнопок */
-    width:660px;
+    width: 1050px;
     margin: 0 auto;
 }
 #slider{ /* Оболочка слайдера */
-    width:640px;
+    width: 1050px;
     height:360px;
     overflow: hidden;
     border:#eee solid 10px;
     position:relative;}
 .slide{ /* Слайд */
-    width:100%;
-    height:100%;
+    background-size: cover;
 }
 .sli-links{ /* Кнопки смены слайдов */
     margin-top:10px;
@@ -216,13 +208,25 @@ nav {
 #prewbutton:hover, #nextbutton:hover{
     opacity:1;}
 
+.bs-wrap {
+    margin-bottom: 30px;
+}
+
 .bs-header {
     display: flex;
-    border-bottom: 1px solid #626262;
+    border-bottom: 2px solid #626262;
     justify-content: space-between;
     align-items: center;
     padding: 0 0 5px 0;
     margin: 0 0 40px 0;
+}
+
+.bs-header a {
+    color: #2e6da4;
+}
+
+.bs-header a:hover {
+    color: #40b4d5;
 }
 
 h2 {
@@ -233,11 +237,16 @@ h2 {
 }
 
 .c-btn {
-    color: #444444;
-    background-color: #c6c6c6;
+    background-color: #e2e2e2;
     width: 40px;
     height: 40px;
-    border: 1px solid #c6c6c6;
+    border: 1px solid #e2e2e2;
+}
+
+.c-btn:hover {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #40b4d5;
 }
 
 .c-btn i {
@@ -252,9 +261,14 @@ h2 {
 
 .product {
     width: 220px;
-    border: 1px solid #e0e0e0;
+    border: 2px solid #c6c6c6;
     border-radius: 4px;
     background-color: #c6c6c6;
+}
+
+.product:hover {
+    border: 2px solid #40b4d5;
+    transition: .5s ease-in-out;
 }
 
 .p-name img {
@@ -284,4 +298,8 @@ h3 a {
     font-size: 16px;
     color: #242424;
     line-height: 16px;
+}
+
+.btn, .btn-primary {
+    transition: .5s ease-in-out;
 }
