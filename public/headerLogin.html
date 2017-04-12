@@ -1,0 +1,13 @@
+{{define "headerLogin"}}
+
+<div class="reg">
+    {{.Name}}
+
+    {{if eq .Role "admin"}}
+    <a href="/adminPage"><button type="button" class="btn btn-primary" >Админка</button></a>
+    {{else}}
+    Ваша роль не админ, вы  {{.Role}}
+    {{end}}
+    <a href="/logout"><button type="button" class="btn btn-primary" >Выход</button></a>
+</div>
+{{end}}

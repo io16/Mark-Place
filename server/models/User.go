@@ -7,26 +7,46 @@ import (
 	"regexp"
 	"strconv"
 	"golang.org/x/crypto/bcrypt"
-	"github.com/jinzhu/gorm"
+	//"github.com/jinzhu/gorm"
 	"../conf/"
 	"fmt"
 	"github.com/labstack/gommon/log"
+
 )
 
-type User struct {
-	gorm.Model
-	Name  string `json:"name" gorm:"size:255"`
-	Login string `json:"login" gorm:"size:255"`
-	Email string `json:"email"gorm:"size:255"`
-	Pass  string `json:"pass"gorm:"size:255"`
+type Place struct {
+	ID          int
+	Name        string
+	Description string
+	TownID      int
+	Town        Town
 }
 
-func isEmailValid(email string) bool {
-	r, _ := regexp.Compile("^[a-zA-z_]([A-Za-z0-9_.-]{0,100})@([a-z]{2,8}[.][a-z]{2,8})$")
-
-	return r.MatchString(email)
+type Town struct {
+	ID   int
+	Name string
 }
-func isUserValid(user User) bool {
+
+func AddUser(c echo.Context) error {
+
+	//u := new(conf.User)
+	//if err := c.Bind(u); err != nil {
+	//	return err
+	//}
+	//return c.JSON(http.StatusOK, u)
+	user := conf.User{}
+
+	json.Unmarshal([]byte(c.FormValue("data")), &user)
+
+	userStatus := isUserValid(user)
+	if userStatus {
+		userStatus = saveUserToDB(user)
+
+	}
+
+	return c.String(http.StatusOK, strconv.FormatBool(userStatus)) // if user created -- return true
+}
+func isUserValid(user conf.User) bool {
 	validationStatus := false
 	r, _ := regexp.Compile("^[A-Za-z0-9_-]{3,50}$")
 
@@ -39,15 +59,23 @@ func isUserValid(user User) bool {
 	return validationStatus
 
 }
-func saveUserToDB(user User) bool {
+
+func isEmailValid(email string) bool {
+	r, _ := regexp.Compile("^[a-zA-z_]([A-Za-z0-9_.-]{0,100})@([a-z]{2,8}[.][a-z]{2,8})$")
+
+	return r.MatchString(email)
+}
+
+func saveUserToDB(user conf.User) bool {
 
 	db := conf.InitDb()
 	defer db.Close()
-	//log.Print(user)
 
-	test := User{}
-	db.Where("login = ?", user.Login).First(&test)
-	if (test.ID == 0) {
+	temp := conf.User{}
+
+	db.Where("login = ?", user.Login).First(&temp)
+
+	if (temp.ID == 0) {
 		fmt.Println("user Created")
 		password := []byte (user.Pass)
 		hashedPassword, err := bcrypt.GenerateFromPassword(password, bcrypt.DefaultCost)
@@ -64,16 +92,24 @@ func saveUserToDB(user User) bool {
 		return false
 
 	}
+	return true
 }
-func AddUser(c echo.Context) error {
-	user := User{}
-	defer c.Request().Body.Close()
-	json.Unmarshal([]byte(c.FormValue("data")), &user)
-	userStatus := isUserValid(user)
-	if userStatus {
-		userStatus = saveUserToDB(user)
 
+func UserAuthentication(login, password string) (conf.User, error) {
+	user := conf.User{}
+
+	db := conf.InitDb()
+	defer db.Close()
+
+	db.Where("login = ?", login).First(&user)
+	db.Model(user).Related(&user.Role)
+
+	err := bcrypt.CompareHashAndPassword([]byte(user.Pass), []byte(password))
+	fmt.Println(user)
+	if err != nil {
+		fmt.Print(err)
+		return user, err
 	}
 
-	return c.String(http.StatusOK, strconv.FormatBool(userStatus)) // if user created -- return true
+	return user, nil
 }

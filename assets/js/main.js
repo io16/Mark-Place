@@ -31,7 +31,7 @@ function validation(obj) {
     }
     else
         objSpan.className = "fa fa-times";
-    console.log(validationStatus + " to "+ objName)
+
     return validationStatus
 }
 
@@ -59,8 +59,7 @@ function createUser() {
     var pass = document.getElementsByName('pass')[0];
     var name = document.getElementsByName('firstName')[0];
     var email = document.getElementsByName('email')[0];
-    if (emailValidation(email) && validation(name) && validation(login) && validation(pass) && passCorrect())
-    {
+    if (emailValidation(email) && validation(name) && validation(login) && validation(pass) && passCorrect()) {
         var obj = new Object();
         obj.login = login.value;
         obj.name = name.value;
@@ -70,9 +69,9 @@ function createUser() {
         $.post("/user", {
                 data: JSON.stringify(obj)
             }, function (data) {
-                console.log(data)
+
                 if (data == "true") {
-                   alert("user created")
+                    alert("user created")
                 } else {
                     alert("user don`t create ")
                 }
@@ -88,3 +87,61 @@ function createUser() {
 /**
  * Created by igor on 01.03.17.
  */
+var userToken
+function login() {
+    var login = document.getElementById("loginInput").value
+    var password = document.getElementById("passwordInput").value
+    $.ajax
+    ({
+        type: "POST",
+        url: "/login",
+        dataType: 'json',
+        async: false,
+        // headers: {
+        //     "Authorization": "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9uIFNub3ciLCJhZG1pbiI6dHJ1ZSwiZXhwIjoxNDkwMzYxMzg4fQ.AUp-oA5HXLojnrsnrmTHbWlZBduJs69osZEVh3ZfBfw"
+        // },
+        data: {
+            username: login,
+            password: password
+        },
+        success: function (token) {
+            $(function() {
+                $.session.set("token", token.token);
+            });
+            setTimeout(function () {
+
+            },100)
+
+        }
+
+    });
+
+}
+
+function mainRedirect() {
+
+}
+
+
+
+// To Read
+function getSessionToken() {
+    return $.session.get("token");
+}
+function test() {
+    $.ajax
+    ({
+        type: "GET",
+        url: "/restricted/test",
+
+        headers: {
+            "Authorization": "Bearer " + getSessionToken()
+        },
+
+        success: function (r) {
+
+            document.write(r)
+        }
+    });
+
+}

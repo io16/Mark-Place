@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/styleLogIn.css" media="screen" type="text/css"/>
+    <script src="/js/jquery-1.7.2.min.js"></script>
+    <script src="/js/jquery.session.js"></script>
+    <script src="/js/main.js"></script>
+</head>
+<body>
+
+
+<div id="login">
+    <form  method="post">
+
+        <p><span id="loginSpan" class="fontawesome-user"></span><input id="loginInput" ame="username" type="text"
+                                                                      placeholder="Login"
+                                                                      required>
+        </p> <!-- JS because of IE support; better: placeholder="Username" -->
+
+
+
+     <!-- JS because of IE support; better: placeholder="Username" -->
+        <p><span id="passSpan" class="fontawesome-lock"></span><input id="passwordInput" name="password" type="password" placeholder="Password"
+
+
+        <!-- JS because of IE support; better: placeholder="Password" -->
+
+        <p><input id="go" type="button" value="Log in" onclick="login()"></p>
+
+
+    </form>
+
+
+    <a href="/"> <span class="fontawesome-arrow-left"> Back</span></a>
+
+</div>
+
+</body>
+</html>
